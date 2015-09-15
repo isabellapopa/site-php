@@ -3,7 +3,15 @@ require_once('config.php');
 require_once('init.php');
 if(!isset($_SESSION['stireId'])) $_SESSION['stireId']='';
 
-
+$cuvinteInterzise = array("test");
+$inlocuiesteCu = "<span style=\"color:red; font-style: italic;\">××× </span>";
+function cenzura($continut) {
+	global $cuvinteInterzise, $inlocuiesteCu;
+	foreach($cuvinteInterzise as $cuvinte) {
+		$continut = eregi_replace($cuvinte, $inlocuiesteCu, $continut);
+		}
+		return $continut;
+		}
 $rezultateLinie = 1;
 $rezultateColoane = 1;
 $totale = mysql_result(mysql_query('SELECT COUNT(*) AS Nr FROM `stiri`'),0);
@@ -29,9 +37,6 @@ else {
 		echo "<table border=\"0\"><tr>\n";
 		while($rand = mysql_fetch_array($cerereSQL)){
 			$_SESSION['stireId']=$rand['id'];
-			echo '<form action="voteaza.php" method="post">
-				<input name="Voteaza" type="submit" id="Voteaza" value="Voteaza"> <br><br>
-				</form>';
 			$nr++;
 			if($seteaza == $rezultateLinie){
 				echo "</tr><tr>\n";
@@ -41,7 +46,9 @@ else {
 			
 		}else $seteaza ++;
 		if($rand['vizibil'] ==1){
+			$rand['stire']= cenzura($rand['stire']);
 			echo "<td bgcolor=".$culoare_celula."> ".$rand['stire']."</td>\n";	
+			echo '<a href="pagina.php"> Intoarce-te la pagina principala</a><br><br>';
 		}
 		
 		

@@ -29,6 +29,7 @@ if($_SESSION['logat'] != 'Da')
 			<a href= "statistici.php"> Statistici asupra site-ului</a><br><br>
 			<a href= "aprobare.php"> Aprobarea unei stiri</a><br><br>
 			<a href= "arhivare.php"> Arhivarea unei stiri</a><br><br>
+			<a href= "aprobaModerator.php"> Aprobarea moderatorilor</a><br><br>
 			<a href= "modificareStire.php"> Modificarea unei stiri</a><br><br>
 			
 			

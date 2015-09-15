@@ -35,6 +35,8 @@ if($_SESSION['logat'] != 'Da')
 			<a href= "vizualizareStiri.php"> Vizualizeaza Stiri</a><br><br>
 			<a href= "punctajUtilizatori.php"> Top 10 utilizatori</a><br><br>
 			<a href= "cauta.php">Cauta Stire</a><br><br>
+			<a href= "voteaza.php">Voteaza stirile</a><br><br>
+			
 			<a href="iesire.php">Iesire</a>';
 	}
 

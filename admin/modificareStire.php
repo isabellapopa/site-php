@@ -52,7 +52,10 @@ switch($_GET['actiune'])
 	 <tr>
     <td height="24"></td>
     <td valign="top"></td>
-    <td valign="top"><input name="Trimite" type="submit" id="Trimite" value="Modifica Stiri">
+    <td valign="top">
+		<input name="Trimite" type="submit" id="Trimite" value="Modifica">
+		<input name="Sterge" type="submit" id="Sterge" value="Sterge">
+	
     <td></td>
     </tr>
   <tr>
@@ -69,11 +72,11 @@ switch($_GET['actiune'])
 			case 'validare':
 				if(!isset($_POST['stire'])) $_SESSION['stire'] = '';
 				else $_SESSION['stire'] = $_POST['stire'];
-				if(($_POST['Trimite'] == 'Modifica Stiri') && ($_SESSION['stire'] == '')){
+				if(($_POST['Trimite'] == 'Modifica ') && ($_SESSION['stire'] == '')){
 					echo 'Completeaza campurile.<br>
 						Apasa <a href="modificareStiri.php?actiune=modificareStiri">aici</a> pentru a te intoarce.';
 				}
-				elseif(($_POST['Trimite'] == 'Modifica Stiri') && ($_SESSION['stire'] != '')){
+				elseif(($_POST['Trimite'] == 'Modifica') && ($_SESSION['stire'] != '')){
 					echo 'Datele au fost modificate. <br>
 						Apasa <a href="pagina.php">aici</a> pentru a te intoarce la pagina principala.';
 						if(isset($_GET['stireId']) && (int)$_GET['stireId'] > 0) {
@@ -81,6 +84,14 @@ switch($_GET['actiune'])
 					mysql_query($cerereSQL);	
 						}
 				}
+				
+				if(($_POST['Sterge'] == 'Sterge') && ($_SESSION['stire'] != '')){
+					$cerereSQL="DELETE FROM stiri WHERE `id`=".(int)$_GET['stireId']."";
+					$rezultat=mysql_query($cerereSQL);
+					echo 'Stirea a fost stearsa . <br>
+						Apasa <a href="pagina.php">aici</a> pentru a te intoarce la pagina principala.';
+				}
+				
 					$_SESSION['stire'] = '';
 				
 				

@@ -42,8 +42,7 @@ switch($_GET['actiune']){
 		$_SESSION['stire'] ='';	
 		}
 		
-		
-		$cerereSQL="SELECT * from stiri";
+	mysql_query("UPDATE utilizatori SET `puncte` =`puncte`+1  WHERE `id` = ".$_SESSION['id']."");
 		
 	break;
 }

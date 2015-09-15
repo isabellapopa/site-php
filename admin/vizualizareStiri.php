@@ -29,9 +29,6 @@ else {
 		echo "<table border=\"0\"><tr>\n";
 		while($rand = mysql_fetch_array($cerereSQL)){
 			$_SESSION['stireId']=$rand['id'];
-			echo '<form action="voteaza.php" method="post">
-				<input name="Voteaza" type="submit" id="Voteaza" value="Voteaza"> <br><br>
-				</form>';
 			$nr++;
 			if($seteaza == $rezultateLinie){
 				echo "</tr><tr>\n";
@@ -41,6 +38,7 @@ else {
 			
 		}else $seteaza ++;
 		echo "<td bgcolor=".$culoare_celula."> ".$rand['stire']."</td>\n";	
+		echo '<a href="pagina.php"> Intoarce-te la pagina principala</a><br><br>';
 		
 		}
 		
@@ -62,6 +60,7 @@ else {
 				echo '<a href=" '.$_SERVER['PHP_SELF'].'?pagina='.$inainte.'">&raquo;</a>&nbsp;';				
 				}
 				echo '</div>';
+				
 		}
 	}
 

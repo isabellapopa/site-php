@@ -25,23 +25,33 @@ if(($_POST['user'] == '') || ($_POST['parola'] == '')){
 		Apasati <a href="autentificare.php">aici</a> pentru a va intoarce la pagina precedenta.';
 	}
 	else{
-		
-		$cerereSQL = "SELECT * FROM utilizatori WHERE utilizator='".$_POST['user']."' AND parola='".md5($_POST['parola'])."'";
+		$selectSQL="SELECT * FROM accesInterzis";
+		$rez=mysql_query($selectSQL);
+		while($acces=mysql_fetch_array($rez)){
+			$cerereSQL = "SELECT * FROM utilizatori WHERE utilizator='".$_POST['user']."' AND parola='".md5($_POST['parola'])."'";
 		$rezultat = mysql_query($cerereSQL);
 		if(mysql_num_rows($rezultat)==1){
 			while($rand=mysql_fetch_array($rezultat)){
-				$_SESSION['id'] = $rand['id'];
+				if($acces['interzis'] != $rand['utilizator']){
+					$_SESSION['id'] = $rand['id'];
 				$_SESSION['logat'] = 'Da';
 				echo'<META HTTP-EQUIV=Refresh CONTENT="0;URL=pagina.php">';
+				}else{
+					echo 'Cont interzis. <Br> 
+				Apasati <a href="autentificare.php">aici</a> pentru a va autentifica cu alt cont.';
+					
+				}
+				
 			}
-		}
-		else{
+		}	else{
 			echo 'Date incorecte. <Br> 
 				Apasati <a href="autentificare.php">aici</a> pentru a va intoarce la pagina precedenta.';
 		}
+		
  
 	}
 	break;
+}
 }
 
 

@@ -11,7 +11,7 @@ if(!isset($_SESSION['admin']) || $_SESSION['admin'] != 'Da') {
 $rezultat=mysql_query("SELECT * FROM stiri");
 $total=0;
 $totalarchive=0;
-$totaldraf=0;
+$totaldraft=0;
 $totalpublished=0;
 while($stire = mysql_fetch_array($rezultat)){
 	$total++;
@@ -24,11 +24,13 @@ echo 'Nr de stiri in total :';
 echo $total;
 echo'<br>';
 echo 'Nr de stiri in draft :';
-echo $totaldraf;
+echo $totaldraft;
 echo'<br>';
 echo 'Nr de stiri in archive :';
 echo $totalarchive;
 echo'<br>';
 echo 'Nr de stiri in published :';
 echo $totalpublished;
+
+
 ?>

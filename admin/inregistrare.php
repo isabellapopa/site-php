@@ -1,17 +1,34 @@
 <?php 
-require_once('config.php');
 require_once('init.php');
 
-if(!isset($_GET['actiune'])) $_GET['actiune'] = '';
-if(!isset($_SESSION['user'])) $_SESSION['user'] = '';
-if(!isset($_SESSION['parola1'])) $_SESSION['parola1'] = '';
-if(!isset($_SESSION['parola2'])) $_SESSION['parola2'] = '';
-if(!isset($_SESSION['nume'])) $_SESSION['nume'] = '';
-if(!isset($_SESSION['prenume'])) $_SESSION['prenume'] = '';
+if(!isset($_GET['actiune']))
+{
+  $_GET['actiune'] = '';
+}
+if(!isset($_SESSION['user']))
+{
+  $_SESSION['user'] = '';
+}
+if(!isset($_SESSION['parola1']))
+{
+  $_SESSION['parola1'] = '';
+}
+if(!isset($_SESSION['parola2']))
+{
+  $_SESSION['parola2'] = '';
+}
+if(!isset($_SESSION['nume']))
+{
+  $_SESSION['nume'] = '';
+}
+if(!isset($_SESSION['prenume']))
+{
+  $_SESSION['prenume'] = '';
+}
 switch($_GET['actiune'])
 {
-case '':
-echo '<table width="309" border="0" cellpadding="0" cellspacing="0">
+  case '':
+    echo '<table width="309" border="0" cellpadding="0" cellspacing="0">
 <form name="formular" action="inregistrare.php?actiune=validare" method="post">
   <tr>
     <td height="36" colspan="4" valign="top"><h1>Formular inregistrare </h1></td>
@@ -90,42 +107,37 @@ echo '<table width="309" border="0" cellpadding="0" cellspacing="0">
   </tr>
   </form>
 </table>';
-break;
+    break;
 
-case 'validare':
+  case 'validare':
 
-$_SESSION['user'] = $_POST['user'];
-$_SESSION['parola1'] = $_POST['parola1'];
-$_SESSION['parola2'] = $_POST['parola2'];
-$_SESSION['nume'] = $_POST['nume'];
-$_SESSION['prenume'] = $_POST['prenume'];
+    $_SESSION['user'] = $_POST['user'];
+    $_SESSION['parola1'] = $_POST['parola1'];
+    $_SESSION['parola2'] = $_POST['parola2'];
+    $_SESSION['nume'] = $_POST['nume'];
+    $_SESSION['prenume'] = $_POST['prenume'];
+    if(($_SESSION['user'] == '') || ($_SESSION['parola1'] == '') || ($_SESSION['parola2'] != $_SESSION['parola1']) || ($_SESSION['nume'] == '') || ($_SESSION['prenume'] == ''))
+    {
+      echo 'Nu ai introdus date in formular sau cele introduse nu sunt corecte. <br>
+		    Apasa <a href="inregistrare.php">aici</a> pentru a te intoarce la pagina anterioara.';
+    }
+    else
+    {
+      echo 'Va multumim. <br>
+		    Datele au fost introduse cu succes in baza de date. <br>
+	        Pentru a va autentifica apasati <a href="autentificare.php">aici</a>.';
+      $cerereSQL = "INSERT INTO utilizatori (`utilizator`, `parola`, `nume`, `prenume`)
+				    VALUES ('".$_SESSION['user']."', '".md5($_SESSION['parola1'])."', '".$_SESSION['nume']."', '".$_SESSION['prenume']."')";
+      $q=$conn->prepare($cerereSQL);
+      $q->execute();
+      $_SESSION['user'] = '';
+      $_SESSION['parola1'] = '';
+	  $_SESSION['parola2'] = '';
+	  $_SESSION['nume'] = '';
+	  $_SESSION['prenume'] = '';
+    }
 
-
-if(($_SESSION['user'] == '') || ($_SESSION['parola1'] == '') || ($_SESSION['parola2'] != $_SESSION['parola1']) || ($_SESSION['nume'] == '') || ($_SESSION['prenume'] == ''))
-{
-	echo 'Nu ai introdus date in formular sau cele introduse nu sunt corecte. <br>
-		Apasa <a href="inregistrare.php">aici</a> pentru a te intoarce la pagina anterioara.';
-} 
-else 
-{
-	echo 'Va multumim. <br> 
-		Datele au fost introduse cu succes in baza de date. <br>
-	  Pentru a va autentifica apasati <a href="autentificare.php">aici</a>.';
-
-	$cerereSQL = "INSERT INTO utilizatori (`utilizator`, `parola`, `nume`, `prenume`)
-				VALUES ('".$_SESSION['user']."', '".md5($_SESSION['parola1'])."', '".$_SESSION['nume']."', '".$_SESSION['prenume']."')";
-	mysql_query($cerereSQL);
-	$_SESSION['user'] = '';
-	$_SESSION['parola1'] = '';
-	$_SESSION['parola2'] = '';
-	$_SESSION['nume'] = '';
-	$_SESSION['prenume'] = '';
-
-}
-
-
-break;
-
+    break;
 }
 
 ?>

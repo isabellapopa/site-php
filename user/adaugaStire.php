@@ -1,15 +1,19 @@
 <?php
-require_once('config.php');
 require_once('init.php');
 
-if(!isset($_SESSION['stire'])) $_SESSION['stire'] = '';
-if(!isset($_GET['actiune'])) $_GET['actiune'] = '';
+if(!isset($_SESSION['stire']))
+{
+	$_SESSION['stire'] = '';
+}
+if(!isset($_GET['actiune']))
+{
+	$_GET['actiune'] = '';
+}
 
-switch($_GET['actiune']){
-	
+switch($_GET['actiune'])
+{
 	case '':
-	
-	echo '<table width="310" border = "0" cellpadding="0"cellspacing ="0">
+		echo '<table width="310" border = "0" cellpadding="0"cellspacing ="0">
 <form name="stire" action="adaugaStire.php" method="post">
  <tr>
   <td height="19" align="right" valign="top">Stire:</td>
@@ -25,26 +29,25 @@ switch($_GET['actiune']){
   </tr>
 </form>
 </table>';
-
-	
 	case 'validare':
-
-	$_SESSION['stire'] = $_POST['stire'];
-
-	if($_SESSION['stire'] == '')echo 'Pentru a va intoarce apasati <a href="pagina.php">aici</a>.';
-	else{
-		echo 'Va multumim. <br> 	
-			Stirea a fost preluata. <br>
-			Pentru a va intoarce apasati <a href="pagina.php">aici</a>.';
-		$cerereSQL= "INSERT INTO stiri (`stire` , `utilizatorId`,`status`)
-					VALUES ('".$_SESSION['stire']."' ,".$_SESSION['id']." , 'draft') ";
-		mysql_query($cerereSQL);			
-		$_SESSION['stire'] ='';	
+		$_SESSION['stire'] = $_POST['stire'];
+		if($_SESSION['stire'] == '')
+		{
+			echo 'Pentru a va intoarce apasati <a href="pagina.php">aici</a>.';
 		}
-		
-	mysql_query("UPDATE utilizatori SET `puncte` =`puncte`+1  WHERE `id` = ".$_SESSION['id']."");
-		
-	break;
+		else
+		{
+			echo 'Va multumim. <br>
+				Stirea a fost preluata. <br>
+				Pentru a va intoarce apasati <a href="pagina.php">aici</a>.';
+			$insertSQL=  "INSERT INTO stiri (`stire` , `utilizatorId`,`status`)
+                          VALUES ('".$_SESSION['stire']."' ,".$_SESSION['id']." , 'draft') ";
+
+			$q = $conn->prepare($insertSQL);
+			$q->execute();
+			$_SESSION['stire'] =' ';
+		}
+		break;
 }
 
 

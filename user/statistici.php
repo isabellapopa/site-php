@@ -1,10 +1,12 @@
 <?php
-require_once('config.php');
+
 require_once('init.php');
 
-$rezultat=mysql_query("SELECT * FROM stiri");
-
-while($stire = mysql_fetch_array($rezultat)){
+$selectSQL="SELECT * FROM stiri";
+$rezultat=$conn->query($selectSQL);
+$rezultat->setFetchMode(PDO::FETCH_ASSOC);
+while($stire = $rezultat->fetch())
+{
 	if($stire['status'] == 'published') $totalpublished ++;
 	if($stire['status'] == 'archive')  $totalarchive ++;
 	if($stire['draft'] == 'draft' ) $totaldraft++;
@@ -12,11 +14,12 @@ while($stire = mysql_fetch_array($rezultat)){
 }
 
 echo 'Nr de stiri in draft :';
-echo $totaldraf;
+echo $totaldraft;
 echo'<br>';
 echo 'Nr de stiri in archive :';
 echo $totalarchive;
 echo'<br>';
 echo 'Nr de stiri in published :';
 echo $totalpublished;
+
 ?>

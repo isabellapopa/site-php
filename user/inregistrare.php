@@ -9,7 +9,6 @@ if(!isset($_SESSION['user']))
 {
     $_SESSION['user'] = '';
 }
-
 if(!isset($_SESSION['parola1']))
 {
     $_SESSION['parola1'] = '';
@@ -26,90 +25,111 @@ if(!isset($_SESSION['prenume']))
 {
     $_SESSION['prenume'] = '';
 }
+?>
 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Inregistrare - New Magazine </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/business-casual.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="brand">News Magazine</div>
+<div class="address-bar">3481 Melrose Place | Beverly Hills, CA 90210 | 123.456.7890</div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+            <a class="navbar-brand" href="index.php">New Magazine</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.php">Home</a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<?php
 switch($_GET['actiune'])
 {
-  case '':
-    echo '<table width="309" border="0" cellpadding="0" cellspacing="0">
-          <form name="formular" action="inregistrare.php?actiune=validare" method="post">
-          <tr>
-          <td height="36" colspan="4" valign="top"><h1>Formular inregistrare </h1></td>
-         </tr>
-          <tr>
-          <td width="80" height="19" valign="top">&nbsp;</td>
-          <td width="15" rowspan="5" valign="top"></td>
-          <td width="144" valign="top">&nbsp;</td>
-          <td width="70" valign="top">&nbsp;</td>
-         </tr>
-          <tr>
-          <td height="22" align="right" valign="top">Utilizator:</td>
-          <td colspan="2" valign="top">
-          <input type="text" name="user" value="'.$_SESSION['user'].'">    </td>
-         </tr>
-          <tr>
-          <td height="7"></td>
-          <td></td>
-          <td></td>
-         </tr>
-          <tr>
-          <td height="22" align="right" valign="top">Parola:</td>
-          <td colspan="2" valign="top"><input type="password" name="parola1" value="'.$_SESSION['parola1'].'"></td>
-         </tr>
-          <tr>
-          <td height="7"></td>
-          <td></td>
-          <td></td>
-         </tr>
-          <tr>
-          <td height="38" align="right" valign="top">Reintroduceti<br> Parola:</td>
-          <td>&nbsp;</td>
-          <td align="middle" valign="middle"><input type="password" name="parola2" value="'.$_SESSION['parola2'].'"></td>
-          <td>&nbsp;</td>
-         </tr>
-          <tr>
-          <td height="7"></td>
-          <td valign="top"></td>
-          <td></td>
-          <td></td>
-         </tr>
-          <tr>
-          <td height="19" align="right">Nume:</td>
-          <td>&nbsp;</td>
-          <td colspan="2" valign="top"><input type="text" name="nume" value="'.$_SESSION['nume'].'"></td>
-          </tr>
-          <tr>
-          <td height="7"></td>
-          <td valign="top"></td>
-          <td></td>
-          <td></td>
-         </tr>
-          <tr>
-          <td height="22" align="right">Prenume:</td>
-          <td valign="top"></td>
-          <td colspan="2" valign="top"><input type="text" name="prenume" value="'.$_SESSION['prenume'].'"></td>
-         </tr>
-          <tr>
-          <td height="8"></td>
-          <td valign="top"></td>
-          <td></td>
-          <td></td>
-         </tr>
-          <tr>
-          <td height="24">&nbsp;</td>
-          <td valign="top"></td>
-          <td colspan="2" valign="top"><input name="Trimite" type="submit" id="Trimite" value="Trimite">
-          <input name="Reseteaza" type="reset" id="Reseteaza" value="Reseteaza"> </td>
-          </tr>
-          <tr>
-          <td height="24">&nbsp;</td>
-          <td valign="top"></td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          </tr>
-          </form>
-          </table>';
+    case '': ?>
+        <div class="container">
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Inregistrare
+                    </h2>
+                    <hr>
+                    <form class="form-horizontal">
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                           <label>Utilizator</label>
+                                <input type="text" name="user" value= <?php echo $_SESSION['user'];?> >
+                            </div>
+                            <div class="form-group col-lg-4">
+                            <label>Parola</label>
+                <input type="password" name="parola1" value= <?php echo $_SESSION['parola1'];?> >
+            </div>
+            <div class="form-group col-lg-4">
+                <label>Reintroduceti Parola</label>
+                <input type="password" name="parola2" value=<?php echo$_SESSION['parola2'];?>>
+            </div>
+            <div class="form-group col-lg-4">
+                <label>Nume</label>
+                <input type="text" name="nume" value=<?php echo$_SESSION['nume'];?>>
+            </div>
+            <div class="form-group col-lg-4">
+                <label>Prenume</label>
+                <input type="text" name="prenume" value=<?php echo $_SESSION['prenume'];?>>
+            </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<?php
+
     break;
+
   case 'validare':
+
     $_SESSION['user'] = $_POST['user'];
     $_SESSION['parola1'] = $_POST['parola1'];
     $_SESSION['parola2'] = $_POST['parola2'];
@@ -123,19 +143,27 @@ switch($_GET['actiune'])
     else
     {
       echo 'Va multumim. <br>
-            Datele au fost introduse cu succes in baza de date. <br>
-            Pentru a va autentifica apasati <a href="autentificare.php">aici</a>.';
+		    Datele au fost introduse cu succes in baza de date. <br>
+	        Pentru a va autentifica apasati <a href="autentificare.php">aici</a>.';
       $cerereSQL = "INSERT INTO utilizatori (`utilizator`, `parola`, `nume`, `prenume`)
-				VALUES ('".$_SESSION['user']."', '".md5($_SESSION['parola1'])."', '".$_SESSION['nume']."', '".$_SESSION['prenume']."')";
-      $q = $conn->prepare($cerereSQL);
+				    VALUES ('".$_SESSION['user']."', '".md5($_SESSION['parola1'])."', '".$_SESSION['nume']."', '".$_SESSION['prenume']."')";
+      $q=$conn->prepare($cerereSQL);
       $q->execute();
       $_SESSION['user'] = '';
       $_SESSION['parola1'] = '';
-      $_SESSION['parola2'] = '';
-      $_SESSION['nume'] = '';
-      $_SESSION['prenume'] = '';
+	  $_SESSION['parola2'] = '';
+	  $_SESSION['nume'] = '';
+	  $_SESSION['prenume'] = '';
     }
+
     break;
 }
 
 ?>
+</body>
+</html>
+
+
+
+
+

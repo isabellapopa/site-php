@@ -1,4 +1,5 @@
 <?php
+
 require_once('init.php');
 
 if(!isset($_GET['actiune']))
@@ -81,55 +82,54 @@ if(!isset($_SESSION['prenume']))
     </div>
     <!-- /.container -->
 </nav>
+<div class="container">
 <?php
 switch($_GET['actiune'])
 {
     case '': ?>
-        <div class="container">
-        <div class="row">
+
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center">Inregistrare
+                    <h2 class="intro-text text-center">Formular inregistrare
                     </h2>
                     <hr>
-                    <form class="form-horizontal">
-                        <div class="row">
-                            <div class="form-group col-lg-4">
-                           <label>Utilizator</label>
-                                <input type="text" name="user" value= <?php echo $_SESSION['user'];?> >
-                            </div>
-                            <div class="form-group col-lg-4">
-                            <label>Parola</label>
-                <input type="password" name="parola1" value= <?php echo $_SESSION['parola1'];?> >
-            </div>
-            <div class="form-group col-lg-4">
-                <label>Reintroduceti Parola</label>
-                <input type="password" name="parola2" value=<?php echo$_SESSION['parola2'];?>>
-            </div>
-            <div class="form-group col-lg-4">
-                <label>Nume</label>
-                <input type="text" name="nume" value=<?php echo$_SESSION['nume'];?>>
-            </div>
-            <div class="form-group col-lg-4">
-                <label>Prenume</label>
-                <input type="text" name="prenume" value=<?php echo $_SESSION['prenume'];?>>
-            </div>
+                    <form role="form" action="inregistrare.php?actiune=validare" method="post">
+                        <div class="form-group">
+                            <label> Utilizator: </label>
+                            <input type="text" name="user" value="<?php echo $_SESSION['user']; ?>">
+                        </div>
 
+                        <div class="form-group">
+                            <label> Parola: </label>
+                            <input type="password" name="parola1" value="<?php echo $_SESSION['parola1']; ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Reintroduceti parola:  </label>
+                            <input type="password" name="parola2" value="<?php echo $_SESSION['parola2']; ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Nume  </label>
+                            <input type="text" name="nume" value="<?php echo $_SESSION['nume']; ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Prenume  </label>
+                            <input type="text" name="prenume" value="<?php echo $_SESSION['prenume']; ?>">
+                        </div>
+
+                        <input type="submit" name="Trimite" id="Trimite" value="Trimite">
                     </form>
                 </div>
             </div>
-        </div>
 
-    </div>
-
-</div>
 <?php
 
     break;
 
   case 'validare':
-
     $_SESSION['user'] = $_POST['user'];
     $_SESSION['parola1'] = $_POST['parola1'];
     $_SESSION['parola2'] = $_POST['parola2'];
@@ -137,14 +137,30 @@ switch($_GET['actiune'])
     $_SESSION['prenume'] = $_POST['prenume'];
     if(($_SESSION['user'] == '') || ($_SESSION['parola1'] == '') || ($_SESSION['parola2'] != $_SESSION['parola1']) || ($_SESSION['nume'] == '') || ($_SESSION['prenume'] == ''))
     {
+
+    ?>
+    <div class="box">
+    <?php
       echo 'Nu ai introdus date in formular sau cele introduse nu sunt corecte. <br>
 		    Apasa <a href="inregistrare.php">aici</a> pentru a te intoarce la pagina anterioara.';
+    ?>
+     </div>
+
+    <?php
     }
     else
     {
+    ?>
+    <div class="box">
+    <?php
+
       echo 'Va multumim. <br>
 		    Datele au fost introduse cu succes in baza de date. <br>
 	        Pentru a va autentifica apasati <a href="autentificare.php">aici</a>.';
+
+    ?>
+    </div>
+    <?php
       $cerereSQL = "INSERT INTO utilizatori (`utilizator`, `parola`, `nume`, `prenume`)
 				    VALUES ('".$_SESSION['user']."', '".md5($_SESSION['parola1'])."', '".$_SESSION['nume']."', '".$_SESSION['prenume']."')";
       $q=$conn->prepare($cerereSQL);
@@ -153,10 +169,15 @@ switch($_GET['actiune'])
       $_SESSION['parola1'] = '';
 	  $_SESSION['parola2'] = '';
 	  $_SESSION['nume'] = '';
+	  $_SESSION['nume'] = '';
 	  $_SESSION['prenume'] = '';
     }
 
     break;
+
+    ?>
+</div>
+<?php
 }
 
 ?>

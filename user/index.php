@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
-
     <title>News Magazine</title>
-
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="../css/business-casual.css" rel="stylesheet">
-
 </head>
-
 <body>
 <div class="brand">News Magazine </div>
 <div class="address-bar">3481 Melrose Place | Beverly Hills, CA 90210 | 123.456.7890</div>

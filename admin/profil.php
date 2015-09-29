@@ -82,220 +82,187 @@ if(!isset($_SESSION['logat']))
 if($_SESSION['logat'] != 'Da')
 {
     ?>
-
+        <div class="box">
     <?php
   echo 'Pentru a accesa aceasta pagina, trebuie sa va autentificati. <br>
 		Pentru a va autentifica, apasati <a href="autentificare.php">aici</a><br>
 		Pentru a va inregistra, apasati <a href="inregistrare.php">aici</a>';
+    ?>
+            </div>
+    <?php
 }
 
 
 else
 {
-  switch($_GET['actiune'])
-  {
-
-
-    case '':
-
-      echo '<h1>Profilul dumneavoastra</h1>
+switch($_GET['actiune'])
+{
+case '':
+    ?>
+    <div class="box">
+        <?php
+        echo '<h1>Profilul dumneavoastra</h1>
 				Apasati <a href="profil.php?actiune=date_personale">aici</a> pentru a schimba datele personale.<br>
-				Apasati <a href="profil.php?actiune=parola">aici</a> pentru a schimba parola dumneavoastra.<br><br>
-				<a href="pagina.php">Intoarceti-va la pagina principala.</a>';
-      break;
+				Apasati <a href="profil.php?actiune=parola">aici</a> pentru a schimba parola dumneavoastra.<br><br> ';
+        ?>
+    </div>
+    <?php
+    break;
+case 'date_personale':
+    $cerereSQL = 'SELECT * FROM `utilizatori` WHERE utilizator="'.$_SESSION['user'].'"';
+    $rezultat = $conn->query($cerereSQL);
+    $rezultat->setFetchMode(PDO::FETCH_ASSOC);
+    while($rand =$rezultat->fetch())
+    {
+        ?>
+        <div class="box">
+            <div class="col-lg-4">
+
+                <form role="form" method="post" action ="profil.php?actiune=validare">
+
+                    <h2> Modifica date personale </h2>
+                    <div class="form-group">
+                        <label>Nume</label>
+                        <input type="text" name="nume"  class="form-control" value="<?php echo $rand['nume']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label> Prenume </label> <br>
+                        <input type="text" name="prenume" class="form-control" value="<?php echo $rand['prenume']; ?>">
+                    </div>
+                    <input name="Trimite" type="submit" id="Trimite" value="Modifica date">
+                    <input name="Reseteaza" type="reset" id="Reseteaza" value="Reseteaza">
+                </form>
+            </div>
+        </div>
+
+        <?php
+    }
+    break;
+case 'parola':
+    ?>
 
 
 
-    case 'date_personale':
+    <div class="box">
+        <div class="col-lg-4">
 
-      $cerereSQL = 'SELECT * FROM `utilizatori` WHERE utilizator="'.$_SESSION['user'].'"';
-      $rezultat = $conn->query($cerereSQL);
-      $rezultat->setFetchMode(PDO::FETCH_ASSOC);
-      while($rand =$rezultat->fetch())
-      {
-        echo '<table width="347" border="0" cellpadding="0" cellspacing="0">
-	              <form name="formular" action="profil.php?actiune=validare" method="post">
-	              <tr>
-	              <td height="50" colspan="4" valign="top"><h1>Modifica date personale</h1></td>
-	              </tr>
-	              <tr>
-	              <td width="80" height="19">&nbsp;</td>
-	              <td width="15">&nbsp;</td>
-	              <td width="214">&nbsp;</td>
-	              <td width="38">&nbsp;</td>
-	              </tr>
-	              <tr>
-	              <td height="10"></td>
-	              <td></td>
-	              <td></td>
-	             </tr>
-	              <tr>
-	              <td height="22" align="right" valign="top">Nume:</td>
-	              <td valign="top"></td>
-	              <td valign="top"><input type="text" name="nume" value="'.$rand['nume'].'"></td>
-	              <td></td>
-	              </tr>
-	              <tr>
-	              <td height="9"></td>
-	              <td valign="top"></td>
-	              <td></td>
-	              <td></td>
-	              </tr>
-	              <tr>
-	              <td height="22" align="right" valign="top">Prenume:</td>
-	              <td valign="top"></td>
-	              <td valign="top"><input type="text" name="prenume" value="'.$rand['prenume'].'"></td>
-	              <td></td>
-	              </tr>
-	              <tr>
-	              <td height="9"></td>
-                  <td valign="top"></td>
-                  <td></td>
-                  <td></td>
-                  </tr>
-                  <tr>
-                  <td height="24"></td>
-                  <td valign="top"></td>
-                  <td valign="top"><input name="Trimite" type="submit" id="Trimite" value="Modifica date">
-                  <input name="Reseteaza" type="reset" id="Reseteaza" value="Reseteaza"> </td>
-                  <td></td>
-                  </tr>
-                  <tr>
-                  <td height="19"></td>
-                  <td valign="top"></td>
-                  <td>&nbsp;</td>
-                  <td></td>
-                  </tr>
-                 </form>
-                  </table>';
-      }
+            <form role="form" method="post" action ="profil.php?actiune=validare">
 
-      break;
-
-    case 'parola':
-      echo '<table width="309" border="0" cellpadding="0" cellspacing="0">
-            <form name="formular" action="profil.php?actiune=validare" method="post">
-            <tr>
-            <td height="36" colspan="4" valign="top"><h1>Modifica parola</h1></td>
-            </tr>
-            <tr>
-            <td width="80" height="19" valign="top">&nbsp;</td>
-            <td width="15" rowspan="5" valign="top"></td>
-            <td width="144" valign="top">&nbsp;</td>
-            <td width="70" valign="top">&nbsp;</td>
-            </tr>
-            <tr>
-            <td height="22" align="right" valign="top">Parola:</td>
-            <td colspan="2" valign="top">
-            <input type="password" name="parola1" value="">    </td>
-            </tr>
-            <tr>
-            <td height="7"></td>
-            <td></td>
-            <td></td>
-            </tr>
-            <tr>
-            <td height="22" align="right" valign="top">Reintroduceti parola:</td>
-            <td colspan="2" valign="middle"><input type="password" name="parola2" value=""></td>
-            </tr>
-            <tr>
-            <td height="7"></td>
-            <td></td>
-            <td></td>
-            </tr>
-            <tr>
-            <td height="24">&nbsp;</td>
-            <td valign="top"></td>
-            <td colspan="2" valign="top"><input name="Trimite" type="submit" id="Trimite" value="Modifica parola">
-            <input name="Reseteaza" type="reset" id="Reseteaza" value="Reseteaza"> </td>
-            </tr>
-            <tr>
-            <td height="24">&nbsp;</td>
-            <td valign="top"></td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            </tr>
+                <h2> Modifica parola </h2>
+                <div class="form-group">
+                    <label>Parola</label>
+                    <input type="password" name="parola1"  class="form-control" value="">
+                </div>
+                <div class="form-group">
+                    <label> Reintroduceti parola </label> <br>
+                    <input type="password" name="parola2" class="form-control" value="">
+                </div>
+                <input type="submit" id="Trimite" value="Modifica parola">
+                <input name="Reseteaza" type="reset" id="Reseteaza" value="Reseteaza">
             </form>
-            </table>';
+        </div>
+    </div>
+    <?php
 
-      break;
+    break;
+case 'validare':
 
-    case 'validare':
-
-      if(!isset($_POST['parola1']))
-      {
-        $_SESSION['parola1'] = '';
-      }
-      else{
-        $_SESSION['parola1'] = $_POST['parola1'];
-      }
-
-      if(!isset($_POST['parola2']))
-      {
-        $_SESSION['parola2'] = '';
-      }
-      else
-      {
-        $_SESSION['parola2'] = $_POST['parola2'];
-      }
-
-      if(!isset($_POST['nume']))
-      {
-        $_SESSION['nume'] = '';
-      }
-      else
-      {
-        $_SESSION['nume'] = $_POST['nume'];
-      }
-
-      if(!isset($_POST['prenume']))
-      {
-        $_SESSION['prenume'] = '';
-      }
-      else
-      {
-        $_SESSION['prenume'] = $_POST['prenume'];
-      }
-
-
-      if(($_POST['Trimite'] == 'Modifica date') && ($_SESSION['nume'] == '' || $_SESSION['prenume'] == ''))
-      {
-        echo 'Completeaza campurile.<br>
-				Apasa <a href="profil.php?actiune=date_personale">aici</a> pentru a te intoarce.';
-      }
-      elseif(($_POST['Trimite'] == 'Modifica date') && ($_SESSION['nume'] != '' || $_SESSION['prenume'] != ''))
-      {
-        echo 'Datele au fost modificate. <br>
-			Apasa <a href="pagina.php">aici</a> pentru a te intoarce la pagina principala.';
-        $cerereSQL = "UPDATE utilizatori SET nume='".$_SESSION['nume']."', prenume='".$_SESSION['prenume']."' WHERE utilizator='".$_SESSION['user']."'";
-        $q=$conn->prepare($cerereSQL);
-        $q->execute();
-
-        $_SESSION['nume'] = '';
-        $_SESSION['prenume'] = '';
-
-      }
-      elseif(($_POST['Trimite'] == 'Modifica parola') && ($_SESSION['parola1'] == '' || $_SESSION['parola1'] != $_SESSION['parola2']))
-      {
-        echo 'Completeaza campurile.<br>
-			Apasa <a href="profil.php?actiune=parola">aici</a> pentru a te intoarce.';
-      }
-      elseif(($_POST['Trimite'] == 'Modifica parola') && ($_SESSION['parola1'] != '' || $_SESSION['parola1'] == $_SESSION['parola2']))
-      {
-        echo 'Parola a fost modificata. <br>
-			Apasa <a href="pagina.php">aici</a> pentru a te intoarce la pagina principala.';
-        $cerereSQL = "UPDATE utilizatori SET parola='".md5($_SESSION['parola1'])."' WHERE utilizator='".$_SESSION['user']."'";
-        $q=$conn->prepare($cerereSQL);
-        $q->execute();
-
-        $_SESSION['parola1'] = '';
-        $_SESSION['parola2'] = '';
-      }
-
-      break;
-  }
+if(!isset($_POST['parola1']))
+{
+    $_SESSION['parola1'] = '';
+}
+else{
+    $_SESSION['parola1'] = $_POST['parola1'];
+}
+if(!isset($_POST['parola2']))
+{
+    $_SESSION['parola2'] = '';
+}
+else
+{
+    $_SESSION['parola2'] = $_POST['parola2'];
+}
+if(!isset($_POST['nume']))
+{
+    $_SESSION['nume'] = '';
+}
+else
+{
+    $_SESSION['nume'] = $_POST['nume'];
+}
+if(!isset($_POST['prenume']))
+{
+    $_SESSION['prenume'] = '';
+}
+else
+{
+    $_SESSION['prenume'] = $_POST['prenume'];
 }
 
+
+if(($_POST['Trimite'] == 'Modifica date') && ($_SESSION['nume'] == '' || $_SESSION['prenume'] == ''))
+{
+    ?>
+    <div class="box">
+        <?php
+        echo 'Completeaza campurile.<br>
+				Apasa <a href="profil.php?actiune=date_personale">aici</a> pentru a te intoarce.';
+        ?>
+    </div>
+    <?php
+}
+elseif(($_POST['Trimite'] == 'Modifica date') && ($_SESSION['nume'] != '' || $_SESSION['prenume'] != ''))
+{
+    ?>
+    <div class="box">
+        <?php
+        echo 'Datele au fost modificate. <br>
+			          Apasa <a href="pagina.php">aici</a> pentru a te intoarce la pagina principala.';
+        ?>
+    </div>
+    <?php
+    $cerereSQL = "UPDATE utilizatori SET nume='".$_SESSION['nume']."', prenume='".$_SESSION['prenume']."' WHERE utilizator='".$_SESSION['user']."'";
+    $q=$conn->query($cerereSQL);
+    $q->setFetchMode(PDO::FETCH_ASSOC);
+    $_SESSION['nume'] = '';
+    $_SESSION['prenume'] = '';
+}
+elseif(($_POST['Trimite'] == 'Modifica parola') && ($_SESSION['parola1'] == '' || $_SESSION['parola1'] != $_SESSION['parola2']))
+{
+    ?>
+    <div class="box">
+        <?php
+        echo 'Completeaza campurile.<br>
+			Apasa <a href="profil.php?actiune=parola">aici</a> pentru a te intoarce.';
+        ?>
+    </div>
+    <?php
+}
+elseif(($_POST['Trimite'] == 'Modifica parola') && ($_SESSION['parola1'] != '' || $_SESSION['parola1'] == $_SESSION['parola2']))
+{
+    ?>
+    <div class="box">
+        <?php
+        echo 'Parola a fost modificata. <br>
+			Apasa <a href="pagina.php">aici</a> pentru a te intoarce la pagina principala.';
+        ?>
+    </div>
+    <?php
+    $cerereSQL = "UPDATE utilizatori SET parola='".md5($_SESSION['parola1'])."' WHERE utilizator='".$_SESSION['user']."'";
+    $q=$conn->prepare($cerereSQL);
+    $q->execute();
+    $_SESSION['parola1'] = '';
+    $_SESSION['parola2'] = '';
+}
+break;
 ?>
+</div>
+<?php
+}
+}
+?>
+    </div>
+</body>
+</html>
 
 

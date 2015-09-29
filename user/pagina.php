@@ -84,25 +84,28 @@ if($_SESSION['logat'] != 'Da')
 				Pentru a va autentifica, apasati <a href="autentificare.php">aici</a><br>
 				Pentru a va inregistra, apasati <a href="inregistrare.php">aici</a>';
 			?>
-			</div>
+		</div>
 		<?php
 	}
-	else
-	{	?>
+else
+
+{
+?>
 		<div class="box">
 			<?php
-		echo 'Bine ai venit, <b><i>'.$_SESSION['user'].'</b></i>!';
-		echo formatare(":))");
-		echo'<br><br>';
-		echo'<a href="profil.php">Schimba date personale</a><br><br> 
-			<a href= "adaugaStire.php"> Adauga o stire</a><br><br>
-			<a href= "vizualizareStiri.php"> Vizualizeaza Stiri</a><br><br>
-			<a href= "punctajUtilizatori.php"> Top 10 utilizatori</a><br><br>
-			<a href= "cauta.php">Cauta Stire</a><br><br>
-			<a href= "voteaza.php">Voteaza stirile</a><br><br>
-			<a href="iesire.php">Iesire</a>';
-	}
-?>			</div>
+			echo 'Bine ai venit, <b><i>'.$_SESSION['user'].'</b></i>!';
+			echo formatare(":))");
+			echo'<br><br>';
+			echo'<a href="profil.php">Schimba date personale</a><br><br>
+				<a href= "adaugaStire.php"> Adauga o stire</a><br><br>
+				<a href= "vizualizareStiri.php"> Vizualizeaza Stiri</a><br><br>
+				<a href= "punctajUtilizatori.php"> Top 10 utilizatori</a><br><br>
+				<a href= "cauta.php">Cauta Stire</a><br><br>
+				<a href= "voteaza.php">Voteaza stirile</a><br><br>
+				<a href="iesire.php">Iesire</a>';
+			}
+			?>
 		</div>
+	</div>
 	</body>
 </html>

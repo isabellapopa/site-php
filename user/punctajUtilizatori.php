@@ -59,23 +59,24 @@ require_once('init.php');
 </nav>
 
 <div class="container">
+	<div class="box">
+		<dl>
+			<dt> Top 10 utilizatori : </dt>
+			<br>
+
 <?php
 $cerereSQL="SELECT * FROM utilizatori ORDER by puncte DESC";
 $rezultat=$conn->query($cerereSQL);
 $rezultat->setFetchMode(PDO::FETCH_ASSOC);
  $count=0;
+
  while($utilizator=$rezultat->fetch())
  {
 	 if($count<10)
 	 {
 		 ?>
-		<div class="box">
-			<?php
-		 echo $utilizator['utilizator'];
-		 ?>
-			</div>
-		<?php
-		 echo "<br>";
+		 <dd> <?php echo $utilizator['utilizator']; ?> </dd>
+		 <?php
 		 $count ++;
 	 }
  }
@@ -83,5 +84,6 @@ $rezultat->setFetchMode(PDO::FETCH_ASSOC);
 
 ?>
 	</div>
+</div>
 </body>
 </html>

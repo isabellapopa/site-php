@@ -15,7 +15,7 @@ if(!isset($_SESSION['vizite']))
 }
 ?>
 	<!DOCTYPE html>
-	<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 	<head>
 
@@ -67,31 +67,32 @@ if(!isset($_SESSION['vizite']))
 		</div>
 		<!-- /.container -->
 	</nav>
+	<div class="container">
 
 <?php
 switch($_GET['actiune'])
 {
 	case '':
 		?>
-	<div class="container">
 		<div class="box">
-			<form class="form-horizontal" role="form" method="post" action ="autentificare.php?actiune=validare">
-				<div class="form-group">
-					<div class="form-group col-lg-4">
+			<div class="col-lg-4">
+				<form role="form" method="post" action ="autentificare.php?actiune=validare">
+					<div class="form-group">
 						<label>Utilizator</label>
-						<input type="text" name="user" value="" class="form-control"><br>
+						<input type="text" name="user"  class="form-control" value="">
 					</div>
-					<br>
-					<div class="form-group col-lg-4">
+					<div class="form-group">
 						<label> Parola </label> <br>
-						<input type="password" name="parola" value="">
+						<input type="password" name="parola" class="form-control" value="">
 					</div>
-				</div>
-				<input type="submit" name="Login" value="Login">
-		</div>
+					<input type="submit" name="Login" value="Login">
+				</form>
+			</div>
 		</div>
 
-	<?php
+
+		<?php
+		break;
 	case 'validare':
 
 		$_SESSION['user'] = $_POST['user'];
@@ -101,8 +102,14 @@ switch($_GET['actiune'])
 		$update2SQL->execute();
 		if(($_POST['user'] == '') || ($_POST['parola'] == ''))
 		{
+			?>
+			<div class="box">
+			<?php
 			echo 'Completeaza casutele. <Br>
 				  Apasati <a href="autentificare.php">aici</a> pentru a va intoarce la pagina precedenta.';
+			?>
+				</div>
+	<?php
 		}
 		else
 		{
@@ -140,8 +147,16 @@ switch($_GET['actiune'])
 			}
 			else
 			{
+				?>
+				<div class="box">
+					<?php
 				echo 'Date incorecte. <Br>
 					 Apasati <a href="autentificare.php">aici</a> pentru a va intoarce la pagina precedenta.';
+					?>
+					</div>
+	</div>
+	<?php
+
 			}
 
 		}
@@ -151,16 +166,6 @@ switch($_GET['actiune'])
 
 
 ?>
-
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<p>Copyright &copy; Your Website 2014</p>
-				</div>
-			</div>
-		</div>
-	</footer>
 
 	</body>
 

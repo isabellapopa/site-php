@@ -86,6 +86,7 @@ while($stire = $rezultat->fetch())
 			<dd><?php echo $totalpublished;  ?></dd>
 		</dl>
 	</div>
-	</div>
+
+</div>
 </body>
 </html>

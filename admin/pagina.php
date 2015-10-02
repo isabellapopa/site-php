@@ -84,7 +84,7 @@ else
 		<a href= "ultimulUtilizator.php"> Ultimul utilizator inregistrat</a><br><br>
 		<a href= "utilizatorLenes.php"> Cel mai lenes utilizator</a><br><br>
 		<a href= "interzicere.php"> Interzicere user</a><br><br>
-		<a href= "vizualizareStiri.php"> Vizualizeaza Stiri</a><br><br>
+		<a href= "paginare.php"> Vizualizeaza Stiri</a><br><br>
 		<a href= "statistici.php"> Statistici asupra site-ului</a><br><br>
 		<a href= "aprobare.php"> Aprobarea unei stiri</a><br><br>
 		<a href= "arhivare.php"> Arhivarea unei stiri</a><br><br>
